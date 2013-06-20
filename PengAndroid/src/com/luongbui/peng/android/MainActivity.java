@@ -29,16 +29,12 @@ package com.luongbui.peng.android;
 
 import com.getpebble.android.kit.PebbleKit;
 
-import android.media.RingtoneManager;
 import android.os.*;
-import android.provider.Settings;
-import android.app.*;
 import android.content.*;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.LocalBroadcastManager;
-import android.util.*;
 import android.view.*;
 import android.view.WindowManager.LayoutParams;
 
@@ -125,7 +121,7 @@ public class MainActivity extends FragmentActivity
 		{
 		//Stop the Ringtone, eventually.
 		if(_service!=null)
-			_service.stopRingtone(this);
+			_service.stopRingtone();
 		Intent serviceIntent = new Intent(this, PengService.class);
 		stopService(serviceIntent);
 		finish();
@@ -153,7 +149,7 @@ public class MainActivity extends FragmentActivity
 	public void onStopRingtoneBtn(View source)
 		{
 		if(_service!=null)
-			_service.stopRingtone(this);
+			_service.stopRingtone();
 		finish();
 		}
 	
@@ -169,6 +165,10 @@ public class MainActivity extends FragmentActivity
 		{
 	    switch (item.getItemId())
 	    	{
+	    	case R.id.menu_install_watchapp:
+	    		InstallWatchAppTask task = new InstallWatchAppTask(this);
+	    		task.execute();
+	    		return true;
 	    	case R.id.menu_about:
 	    		showAboutDialog();
 	    		return true;

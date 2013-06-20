@@ -31,14 +31,17 @@ OF SUCH DAMAGE.
     android:layout_height="fill_parent"
     tools:context=".MainActivity" >
     
-     <Button android:id="@+id/stop_ringtone_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/stop_ringtone"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="24dp"
-        android:textStyle="bold"
-        android:textSize="24sp"
-        android:onClick="onStopRingtoneBtn"/>
+     <Button
+         android:id="@+id/stop_ringtone_btn"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_centerInParent="true"
+         android:layout_marginTop="24dp"
+         android:background="@drawable/stop_button_selector"
+         android:onClick="onStopRingtoneBtn"
+         android:text="@string/stop_ringtone"
+         android:textColor="@android:color/black"
+         android:textSize="24sp"
+         android:textStyle="bold" />
 
 </RelativeLayout>

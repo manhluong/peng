@@ -284,21 +284,16 @@ void overrideSingleSelect(ClickRecognizerRef recognizer, Window *window)
 					scr = CMD_SCREEN_ON;
 				//Send command.
 				sendPengStartCmd(scr, volume);
-				//Notify user.
-				vibes_short_pulse();
-				//MainMenu status update.
-				mainmenuStatus = PENGING_STATUS;
-				//Update.
-				menu_layer_reload_data(&mainMenu);
+				//Status switch is in out_sent_peng().
+				//So status changes only if the cmd is actually sent.
+				//mainmenuStatus = PENGING_STATUS;
 				}
 			else if(mainmenuStatus==PENGING_STATUS)
 				{
 				sendCmd(CMD_PENG, CMD_PENG_STOP);
-				//Status switch is in onReceivedMsg().
+				//Status switch is in in_received_peng().
 				//This way the user can resend a Stop if it fails.
 				//mainmenuStatus = SELECT_STATUS;
-				//Update.
-				menu_layer_reload_data(&mainMenu);
 				}
 			break;
 		case VOLUME_INDEX:

@@ -48,10 +48,9 @@ void sendPengStartCmd(uint8_t screen, uint8_t volume);
 void showHelp();
 void showAbout();
 
-//As with firmware 1.0.2, there are weird errors if not static.
-
-static void onReceivedMsg(DictionaryIterator* received, void* context);
-static void onFailedOutMsg(DictionaryIterator* failed, AppMessageResult reason, void* context);
-static void onDroppedInMsg(void* context, AppMessageResult reason);
+void in_received_peng(DictionaryIterator* received, void* context);
+void out_sent_peng(DictionaryIterator* sent, void* context);
+void out_failed_peng(DictionaryIterator* failed, AppMessageResult reason, void* context);
+void in_failed_peng(void* context, AppMessageResult reason);
 
 #endif

@@ -27,10 +27,17 @@ OF SUCH DAMAGE.
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
+        android:id="@+id/menu_install_watchapp"
+        android:orderInCategory="98"
+        android:showAsAction="never"
+        android:title="@string/install_watchapp"/>
+    
+    <item
         android:id="@+id/menu_stop_service"
         android:orderInCategory="99"
         android:showAsAction="never"
         android:title="@string/stop_service"/>
+    
     <item
         android:id="@+id/menu_about"
         android:orderInCategory="100"

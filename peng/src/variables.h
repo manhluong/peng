@@ -77,9 +77,6 @@ extern uint8_t mainmenuStatus;
 extern uint8_t volume;
 extern bool turnScreen;
 
-/**
- * Don't know why but there is no menu_layer_get_selected_index().
- */
 extern uint8_t selectedMainMenuRow;
 
 #endif

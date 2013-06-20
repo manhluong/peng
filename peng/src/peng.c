@@ -38,7 +38,7 @@ PBL_APP_INFO
 	(
 	MY_UUID,
 	"Peng", "Manh Luong Bui",
-	0, 1, /* App version */
+	0, 2, /* App version */
 	DEFAULT_MENU_ICON,
 	APP_INFO_STANDARD_APP
 	);
@@ -65,9 +65,10 @@ void handle_init(AppContextRef ctx)
 		(AppMessageCallbacksNode){
 		.callbacks =
 			{
-			.out_failed = onFailedOutMsg,
-			.in_received = onReceivedMsg,
-			.in_dropped = onDroppedInMsg
+			.out_sent = out_sent_peng,
+			.out_failed = out_failed_peng,
+			.in_received = in_received_peng,
+			.in_dropped = in_failed_peng
 			},
 		.context = NULL
 		};
@@ -103,8 +104,22 @@ void window_unload(Window *window)
 		sendCmd(CMD_PENG, CMD_PENG_STOP);
 	}
 
-//As with firmware 1.0.2, there are weird errors if not static.
-static void onReceivedMsg(DictionaryIterator* received, void* context)
+void out_sent_peng(DictionaryIterator* sent, void* context)
+	{
+	if(dict_find(sent, CMD_PENG) &&
+		dict_find(sent, CMD_SCREEN) &&
+		dict_find(sent, CMD_VOLUME))
+		{
+		//MainMenu status update.
+		mainmenuStatus = PENGING_STATUS;
+		//Update.
+		menu_layer_reload_data(&mainMenu);
+		//Notify user.
+		vibes_short_pulse();
+		}
+	}
+
+void in_received_peng(DictionaryIterator* received, void* context)
 	{
 	Tuple* cmdTuple = NULL;
 	cmdTuple = dict_find(received, CMD_PENG);
@@ -126,16 +141,14 @@ static void onReceivedMsg(DictionaryIterator* received, void* context)
 		}
 	}
 
-//As with firmware 1.0.2, there are weird errors if not static.
-static void onFailedOutMsg(DictionaryIterator* failed, AppMessageResult reason, void* context)
+void out_failed_peng(DictionaryIterator* failed, AppMessageResult reason, void* context)
 	{
-	//TODO manage send error.
+
 	}
 
-//As with firmware 1.0.2, there are weird errors if not static.
-static void onDroppedInMsg(void* context, AppMessageResult reason)
+void in_failed_peng(void* context, AppMessageResult reason)
 	{
-	//TODO manage read error.
+
 	}
 
 /**
