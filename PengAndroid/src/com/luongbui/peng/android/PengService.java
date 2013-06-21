@@ -93,11 +93,11 @@ public class PengService extends Service
 		{
 		if (_comm != null)
 			{
+			stopRingtone();
+			_ringtone = null;
             unregisterReceiver(_comm);
             _comm = null;
 			}
-		stopRingtone();
-		_ringtone = null;
 		}
 	
 	@Override
