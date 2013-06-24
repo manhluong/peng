@@ -153,6 +153,12 @@ public class MainActivity extends FragmentActivity
 		finish();
 		}
 	
+	public void onTurnOffFlashlightBtn(View source)
+		{
+		if(_service!=null)
+			_service.turnFlashlight(PengService.CMD_FLASHLIGHT_OFF);
+		}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 		{

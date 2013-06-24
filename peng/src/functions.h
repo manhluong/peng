@@ -38,6 +38,9 @@ void overrideSingleDown(ClickRecognizerRef recognizer, Window *window);
 void overrideLongDown(ClickRecognizerRef recognizer, Window *window);
 void overrideConfigProvider(ClickConfig **config, void *context);
 
+uint16_t mainMenuGetNumRows (struct MenuLayer *ml, uint16_t sectionIndex, void *clbCtx);
+uint16_t mainMenuGetNumSections(struct MenuLayer *menuLayer, void *context);
+
 //Sending messages.
 
 void sendCmd(uint8_t cmd, uint8_t val);

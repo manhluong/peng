@@ -36,10 +36,23 @@ OF SUCH DAMAGE.
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:layout_centerInParent="true"
-         android:layout_marginTop="24dp"
          android:background="@drawable/stop_button_selector"
          android:onClick="onStopRingtoneBtn"
          android:text="@string/stop_ringtone"
+         android:textColor="@android:color/black"
+         android:textSize="24sp"
+         android:textStyle="bold" />
+     
+     <Button
+         android:id="@+id/turnoffflashlight_ringtone_btn"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_centerInParent="true"
+         android:layout_marginTop="20dp"
+         android:layout_below="@+id/stop_ringtone_btn"
+         android:background="@drawable/turnoffflashlight_button_selector"
+         android:onClick="onTurnOffFlashlightBtn"
+         android:text="@string/turn_off_flashlight"
          android:textColor="@android:color/black"
          android:textSize="24sp"
          android:textStyle="bold" />

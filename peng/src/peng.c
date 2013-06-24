@@ -38,7 +38,7 @@ PBL_APP_INFO
 	(
 	MY_UUID,
 	"Peng", "Manh Luong Bui",
-	0, 2, /* App version */
+	0, 3, /* App version */
 	DEFAULT_MENU_ICON,
 	APP_INFO_STANDARD_APP
 	);
@@ -117,27 +117,38 @@ void out_sent_peng(DictionaryIterator* sent, void* context)
 		//Notify user.
 		vibes_short_pulse();
 		}
+	if(dict_find(sent, CMD_FLASHLIGHT))
+		{
+		//Vibes only if the user sent the cmd.
+		if(dict_find(sent, CMD_FLASHLIGHT)->value->uint8 != CMD_FLASHLIGHT_CHECK)
+			vibes_short_pulse();
+		}
 	}
 
 void in_received_peng(DictionaryIterator* received, void* context)
 	{
 	Tuple* cmdTuple = NULL;
-	cmdTuple = dict_find(received, CMD_PENG);
 
-	if (cmdTuple == NULL)//We've got only one command from Peng for Android.
+	cmdTuple = dict_find(received, CMD_PENG);
+	if (cmdTuple)
 		{
+		uint8_t cmd = cmdTuple->value->int8;
+		if (cmd == CMD_PENG_STOP)
+			{
+			mainmenuStatus = SELECT_STATUS;
+			//Update.
+			menu_layer_reload_data(&mainMenu);
+			//Just for fun.
+			vibes_long_pulse();
+			}
 		return;
 		}
 
-	uint8_t cmd = cmdTuple->value->int8;
-
-	if (cmd == CMD_PENG_STOP)
+	cmdTuple = dict_find(received, CMD_FLASHLIGHT_CHECK);
+	if (cmdTuple)
 		{
-		mainmenuStatus = SELECT_STATUS;
-		//Update.
+		flashlight = cmdTuple->value->uint8;
 		menu_layer_reload_data(&mainMenu);
-		//Just for fun.
-		vibes_long_pulse();
 		}
 	}
 
@@ -169,7 +180,8 @@ void sendCmd(uint8_t cmd, uint8_t val)
 
 /**
  * Send both screen & volume in same dictionary.
- * Necessary because Service onStartCommand may be called multiple times.
+ * Necessary because PengService.onStartCommand() doesn't store each value and the
+ * Service may be called multiple times.
  */
 void sendPengStartCmd(uint8_t screen, uint8_t volume)
 	{

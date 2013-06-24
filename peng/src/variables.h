@@ -28,21 +28,34 @@
 #ifndef VARIABLES_H
 #define VARIABLES_H
 
-#define MENU_ROWS_NUM 5
+#define MENU_SECTION_PENG 0
+#define MENU_SECTION_PENG_TITLE "Peng"
+#define MENU_SECTION_FLASHLIGHT 1
+#define MENU_SECTION_FLASHLIGHT_TITLE "Flashlight"
+#define MENU_SECTION_INFO 2
+#define MENU_SECTION_INFO_TITLE "Info"
+
+#define MENU_ROWS_NUM_PENG 3
+#define MENU_ROWS_NUM_FLASHLIGHT 1
+#define MENU_ROWS_NUM_INFO 2
 
 #define PENG_INDEX 0
 #define VOLUME_INDEX 1
 #define SCREEN_INDEX 2
-#define HELP_INDEX 3
-#define ABOUT_INDEX 4
+#define FLASHLIGHT_INDEX 0
+#define HELP_INDEX 0
+#define ABOUT_INDEX 1
 
 #define PENG_ACTION "Peng!"
 #define PENG_STOP "STOP!"
 #define VOLUME_TEXT " Volume "
 #define VOLUME_TEXT_SELECTED "[Volume]"
 #define SCREEN_TEXT "Turn screen on"
+#define FLASHLIGHT_TEXT "Flashlight"
 #define HELP_TEXT "Help"
 #define ABOUT_TEXT "About"
+
+//CMD
 
 #define CMD_PENG 0x00
 #define CMD_PENG_START 0x00
@@ -53,6 +66,14 @@
 #define CMD_SCREEN 0x03
 #define CMD_SCREEN_ON 0x04
 #define CMD_SCREEN_OFF 0x05
+
+#define CMD_FLASHLIGHT 0x06
+#define CMD_FLASHLIGHT_CHECK 0x07
+#define CMD_FLASHLIGHT_ON 0x08
+#define CMD_FLASHLIGHT_OFF 0x09
+#define CMD_FLASHLIGHT_NOT_AVAILABLE 0x0A
+
+//END CMD
 
 #define SELECT_STATUS 0x00
 #define SELECT_VOLUME_STATUS 0x01
@@ -76,7 +97,6 @@ extern TextLayer aboutTextLayer;
 extern uint8_t mainmenuStatus;
 extern uint8_t volume;
 extern bool turnScreen;
-
-extern uint8_t selectedMainMenuRow;
+extern uint8_t flashlight;
 
 #endif

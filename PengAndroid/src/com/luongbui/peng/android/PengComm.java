@@ -4,9 +4,6 @@ import java.util.UUID;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.media.AudioManager;
-import android.preference.PreferenceManager;
 import android.support.v4.content.LocalBroadcastManager;
 
 import com.getpebble.android.kit.PebbleKit;
@@ -41,15 +38,6 @@ public class PengComm extends PebbleDataReceiver
     				//Expected with Peng!
     				final int screenVal = data.getUnsignedInteger(PengService.CMD_SCREEN).intValue();
     				final int volumeVal = data.getUnsignedInteger(PengService.CMD_VOLUME).intValue();
-    				
-    				//Retrieve and save old volume level.
-    				AudioManager audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
-    				int oldVolume = audioManager.getStreamVolume(AudioManager.STREAM_RING);
-    				int oldRingerMode = audioManager.getRingerMode();
-    				SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
-    		        editor.putInt(PengService.OLD_VOLUME_KEY, oldVolume);
-    		        editor.putInt(PengService.OLD_RINGER_KEY, oldRingerMode);
-    		        editor.commit();
     			
     		        //Screen.
     		        if(screenVal == PengService.CMD_SCREEN_OFF)
@@ -75,6 +63,16 @@ public class PengComm extends PebbleDataReceiver
     				break;
     			}
 			}
+		else if(data.contains(PengService.CMD_FLASHLIGHT))
+			{
+			PebbleKit.sendAckToPebble(context, transactionId);
+			final int cmd = data.getUnsignedInteger(PengService.CMD_FLASHLIGHT).intValue();
+			if(cmd==PengService.CMD_FLASHLIGHT_CHECK)
+				sendComm(PengService.CMD_FLASHLIGHT_CHECK, (byte)_ctx.getFlashlightStatus());
+			else
+				//It also sends a CMD_FLASHLIGHT_CHECK as response.
+				_ctx.turnFlashlight(cmd);
+			}
 		}
 	
 	public void sendComm(int cmd, byte val)
@@ -85,5 +83,7 @@ public class PengComm extends PebbleDataReceiver
 									PengService.PENG_APP_UUID,
 									dict);
 		}
+	
+	
 	
 	}
