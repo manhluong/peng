@@ -488,6 +488,8 @@ void overrideSingleSelect(ClickRecognizerRef recognizer, Window *window)
 			else if(flashlight==CMD_FLASHLIGHT_OFF)
 				sendCmd(CMD_FLASHLIGHT, CMD_FLASHLIGHT_ON);
 			}
+		else//Manually send a check flashlight presence.
+			sendCmd(CMD_FLASHLIGHT, CMD_FLASHLIGHT_CHECK);//Expect CMD_FLASHLIGHT_CHECK in response.
 		}
 	else if(selection.section == MENU_SECTION_INFO)
 		{

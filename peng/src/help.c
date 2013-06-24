@@ -41,10 +41,10 @@ void showHelp()
 	//Create the TextLayer.
 	text_layer_init(&helpTextLayer, helpWnd.layer.frame);
 	text_layer_set_text(&helpTextLayer,
-			"Please be advised that this app is a test: use it at your own risk.\nMore info: www.luongbui.com\n\nUse UP/DOWN to navigate the menu.\n\nSELECT behavior changes according to selected item.\n\nSELECT at PENG! to trig the paired smartphone. Press again to stop. Peng will reset the status after it received the ack from the smartphone.\nIf it doesn't stop, just press Stop! again.\n\nSELECT at Volume to change volume level. While you read [Volume], UP/DOWN to change volume level. Long press to set to 0, halfway and maximum.\n\nVolume is set only for the ringtone. Android app will try to restore your previous volume level.\n\nSELECT again to return to menu navigation.\n\nSELECT at the checkbox to choose to turn on / off the screen at ringtone trig.\n");
+			"Please be advised that this app is a test: use it at your own risk.\nMore info: www.luongbui.com\n\nUse UP/DOWN to navigate the menu.\n\nSELECT behavior changes according to selected item.\n\nSELECT at PENG! to trig the paired smartphone. Press again to stop. Peng will reset the status after it received the ack from the smartphone.\nIf it doesn't stop, just press Stop! again.\n\nSELECT at Volume to change volume level. While you read [Volume], UP/DOWN to change volume level. Long press to set to 0, halfway and maximum.\n\nVolume is set only for the ringtone. Android app will try to restore your previous volume level.\n\nSELECT again to return to menu navigation.\n\nSELECT at the checkbox to choose to turn on / off the screen at ringtone trig.\n\nFlashlight activation is independent from Peng!.\nWhen \"Flashlight\" menu item is strike out, SELECT it to manually send a check.\n");
 	//Boost the maximum TextLayer size.
 	GSize txtMaxSize = text_layer_get_max_used_size(app_get_current_graphics_context(),&helpTextLayer);
-	txtMaxSize.h = (helpTextLayer.layer.bounds.size.h * 3) + 120;
+	txtMaxSize.h = (helpTextLayer.layer.bounds.size.h * 3) + 230;
 	text_layer_set_size(&helpTextLayer, txtMaxSize);
 	//Create the ScrollLayer.
 	scroll_layer_init(&helpScroll,
